@@ -1,0 +1,22 @@
+<template>
+    <section>
+       <pg-operations :btns="operations" @add="add"></pg-operations>
+        <pg-table 
+            :list="defpagelist"
+            @select-change="selectChange"
+            @edit="edit">
+        </pg-table>
+        <pg-pagination slot="pagination" @size-change="sizeChange" @current-change="currentChange" :current-page="currentPage" :page-size="pageSize" :total="total">
+        </pg-pagination>
+        <pg-edit :title="title" :show="isEdit" @close="closeEdit"></pg-edit>
+    </section>
+</template>
+<style rel="stylesheet/less" lang="less" scoped>
+    @import '~assets/styles/_variables';
+</style>
+<script type="text/babel">
+    import index from './index'
+    export default {
+        ...index
+    }
+</script>

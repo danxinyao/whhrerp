@@ -1,0 +1,37 @@
+import PgTable from './components/table/index.vue'
+import { subscribe as ajax} from 'services'
+export default {
+    components: {
+        PgTable,
+    },
+    data() {
+        return {
+            subscribelist: [],
+            form: {},
+            total: 0, // 数据总条数
+            page: 1, // 当前页数
+            pageSize: 15, // 每页条数
+        }
+    },
+    mounted() {
+        this.getSubscribes()
+    },
+    methods: {
+        getSubscribes() {
+            ajax.getSubscribes(this.page, this.pageSize).then((result)=>{
+                this.subscribelist = result.data
+                this.total = result.totalCount
+            })
+        },
+        // 当前页数更是触发
+        currentChange(current) {
+            this.page = current
+            this.getSubscribes()
+        },
+        // 每页条数更改时触发
+        sizeChange(size) {
+            this.pageSize = size
+            this.getSubscribes()
+        },
+    }
+}
